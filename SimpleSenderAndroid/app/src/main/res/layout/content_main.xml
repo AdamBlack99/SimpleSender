@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="175dp">
+
+        <LinearLayout
+            android:id="@+id/senderLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/addressInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:ems="10"
+                android:hint="Reciever Ip address"
+                android:textColorHint="#81858c"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/messageInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="@color/black"
+                android:textColorHint="#81858c"
+                android:hint="Your message"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/sendButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#303030"
+                android:onClick="onSendClick"
+                android:text="Send"
+                android:textColor="@color/white"
+                app:iconTint="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/messageOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:textColor="#81858c"
+                android:ems="10"
+                android:hint="..."
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/listenButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#303030"
+                android:onClick="onListenClick"
+                android:backgroundTint="#303030"
+                android:textColor="@color/white"
+                android:text="Recieve" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
