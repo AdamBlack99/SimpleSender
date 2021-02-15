@@ -5,6 +5,7 @@
 #include <QLayout>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QLabel>
 
 #include "Models/model.h"
 
@@ -31,13 +32,15 @@ private:
     QLineEdit *_messageInput;
     QLineEdit *_messageOutput;
     QLineEdit *_myAddressInput;
+    QLabel *_senderBg;
+    QLabel *_receiverBg;
 
     Model *_model;
 
 public slots:
     void sendMessage();
     void listenForMessage();
-    void displayMessage(std::string message);
+    void displayMessage(QString message);
 
 };
 

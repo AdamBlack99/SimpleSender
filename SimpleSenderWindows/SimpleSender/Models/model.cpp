@@ -2,7 +2,7 @@
 
 Model::Model()
 {
-
+    _server = new Server();
 }
 
 
@@ -14,9 +14,9 @@ void Model::send(std::string address, std::string message)
 
 void Model::listen(std::string address)
 {
-    Server* server = new Server(address);
-    std::string reply = server->listenForMessage();
+    _server->setAddress(address);
+    _server->listenForMessage();
     //Notifys the UI, and gives it the message.
-    emit gotMessage(reply);
 
 }
+

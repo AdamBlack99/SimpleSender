@@ -15,9 +15,11 @@ class Model : public QObject
         Model();
         void send(std::string address, std::string message);
         void listen(std::string address);
+        Server* _server;
 
    signals:
         void gotMessage(std::string message);
+
 };
 
 #endif // MODEL_H
