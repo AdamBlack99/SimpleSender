@@ -26,9 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _sendButton->setText("SEND");
     _sendLayout->addWidget(_sendButton);
 
-    _listenButton = new QPushButton();
-    _listenButton->setText("Listen");
-    _recieveLayout->addWidget(_listenButton);
+
 
     _messageOutput = new QLineEdit();
     _messageOutput->setPlaceholderText("The message you recieve will appear here");
@@ -38,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _myAddressInput->setPlaceholderText("Your IP");
     _recieveLayout->addWidget(_myAddressInput);
 
+    _listenButton = new QPushButton();
+    _listenButton->setText("Listen");
+    _recieveLayout->addWidget(_listenButton);
 
 
     _model = new Model();
