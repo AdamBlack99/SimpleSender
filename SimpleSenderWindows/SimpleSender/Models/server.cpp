@@ -8,7 +8,7 @@ Server::Server(std::string address)
 }
 
 
-//Start a server and listens untill a message arrives
+//Start a server and listens until a message arrives
 void Server::listener()
 {
     qInfo("Listener ready");
