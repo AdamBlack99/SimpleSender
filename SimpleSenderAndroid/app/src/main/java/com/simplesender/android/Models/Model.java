@@ -2,20 +2,30 @@ package com.simplesender.android.Models;
 
 import android.util.Log;
 
-public class Model {
+import com.simplesender.android.Utils.EventInterface;
 
-    public Model() {}
+public class Model {
+    private Reciever receiver;
+
+    public Model() {
+        receiver = new Reciever();
+    }
 
     //Sends the message
     public void send(String address, String message) {
         new Sender().execute(address, message);
     }
 
+    public void addListener(EventInterface e) {
+        receiver.subscribe(e);
+    }
 
     //Stats the server and waits for it to return the message it received
     public String recieve() {
         Log.i("Model:" ,"Start Listening");
-        return new Reciever().recieve();
+        receiver.recieve();
+        return "";
+
     }
 
 }

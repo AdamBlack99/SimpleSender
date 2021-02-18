@@ -10,8 +10,12 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.Buffer;
+import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import com.simplesender.android.Utils.EventInterface;
 
 public class Reciever {
 
@@ -19,17 +23,28 @@ public class Reciever {
     private BufferedReader _bfr;
     private InputStreamReader _isr;
     private String message;
+    private List<EventInterface> gotMessageListeners;
+
+    public Reciever(){
+        gotMessageListeners = new ArrayList<EventInterface>();
+
+    }
+
+    public void subscribe(EventInterface listener) {
+        gotMessageListeners.add(listener);
+    }
 
     //Start the server and waits until the first message arrives. While doing so, it blocks the main thread.
     //Returns the message it received as a String.
     //TODO: Rewrite it not to block the main thread.
     String recieve() {
-        BlockingQueue<String> messages = new LinkedBlockingQueue<>();
-
+        //BlockingQueue<String> messages = new LinkedBlockingQueue<>();
+        Log.i("Server", "Setting up receiver");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    Log.i("Server: ", "Thread started");
                     _server = new ServerSocket(10000);
                     Log.i("Server: ", "Set up");
 
@@ -41,16 +56,18 @@ public class Reciever {
                     tempMessage = _bfr.readLine();
                     Log.i("Server: ", tempMessage);
 
-                    messages.put(tempMessage);
+                    //messages.put(tempMessage);
                     Log.i("Server: ", "Recieved");
                     _isr.close();
 
                     client.close();
+                    for(EventInterface e : gotMessageListeners) {
+                        e.gotMessage(tempMessage);
+                    }
 
 
 
-
-                } catch (IOException | InterruptedException  e) {
+                } catch (IOException e) {
 
                     if (null == e.getMessage()) {
                         Log.e("Server: ", "Fatal Error");
@@ -66,9 +83,10 @@ public class Reciever {
 
 
                 }
+
             }
         }).start();
-
+        /*
         try {
             message = messages.take();
         } catch (InterruptedException e) {
@@ -76,7 +94,9 @@ public class Reciever {
             message = "";
         }
 
+        */
         return message;
     }
+
 
 }

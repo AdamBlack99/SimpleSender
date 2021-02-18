@@ -19,8 +19,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.simplesender.android.Models.Model;
+import com.simplesender.android.Utils.EventInterface;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EventInterface{
     private Model _model;
 
     @Override
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         _model = new Model();
+        _model.addListener(this);
     }
 
     @Override
@@ -72,11 +74,16 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Ui:" ,"Start Listening");
         Button button = (Button)findViewById(R.id.listenButton);
         button.setText("Listening");
+        _model.recieve();
 
-        EditText message = (EditText)findViewById(R.id.messageOutput);
 
 
-        message.setText(_model.recieve());
+    }
+
+    public void gotMessage(String message) {
+        EditText messageBox = (EditText)findViewById(R.id.messageOutput);
+        Button button = (Button)findViewById(R.id.listenButton);
+        messageBox.setText(message);
         button.setText("Recieve");
 
 
